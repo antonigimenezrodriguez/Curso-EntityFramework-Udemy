@@ -14,6 +14,7 @@ namespace EFCorePeliculas
         public DbSet<CineOferta> CinesOfertas { get; set; }
         public DbSet<SalaDeCine> SalasDeCine { get; set; }
         public DbSet<Pelicula> Peliculas { get; set; }
+        public DbSet<PeliculaActor> PeliculasActores { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -65,6 +66,11 @@ namespace EFCorePeliculas
             modelBuilder.Entity<SalaDeCine>().Property(prop => prop.TiposalaDeCine)
                 //.HasDefaultValueSql("GETDATE()") // De esta forma se pueden usar expresiones SQL para el valor por defecto, en este caso se obtendria la hora actual desde SQL
                 .HasDefaultValue(TipoSalaDeCine.DosDimensiones); //Especificamos el valor por defecto
+
+            //PeliculaActor
+            modelBuilder.Entity<PeliculaActor>().HasKey(prop => new { prop.PeliculaId, prop.ActorId });
+            modelBuilder.Entity<PeliculaActor>().Property(prop => prop.Personaje)
+                .HasMaxLength(150);
         }
 
     }
