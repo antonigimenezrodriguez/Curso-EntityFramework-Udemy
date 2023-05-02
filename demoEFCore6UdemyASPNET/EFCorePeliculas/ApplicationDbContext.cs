@@ -12,6 +12,7 @@ namespace EFCorePeliculas
         public DbSet<Actor> Actores { get; set; }
         public DbSet<Cine> Cines { get; set; }
         public DbSet<CineOferta> CinesOfertas { get; set; }
+        public DbSet<SalaDeCine> SalasDeCine { get; set; }
         public DbSet<Pelicula> Peliculas { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -39,8 +40,6 @@ namespace EFCorePeliculas
             modelBuilder.Entity<Cine>().Property(prop => prop.Nombre)
                 .HasMaxLength(150)
                 .IsRequired();
-            modelBuilder.Entity<Cine>().Property(prop => prop.Precio)
-                .HasPrecision(precision: 9, scale: 2);
 
             //Pelicula
             modelBuilder.Entity<Pelicula>().Property(prop => prop.Titulo)
@@ -60,6 +59,9 @@ namespace EFCorePeliculas
             modelBuilder.Entity<CineOferta>().Property(prop => prop.FechaFin)
                 .HasColumnType("date");
 
+            //SalaDeCine
+            modelBuilder.Entity<SalaDeCine>().Property(prop => prop.Precio)
+                .HasPrecision(precision: 9, scale: 2);
         }
 
     }
