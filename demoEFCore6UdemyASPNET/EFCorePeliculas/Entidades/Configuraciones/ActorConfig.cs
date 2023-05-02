@@ -9,7 +9,7 @@ namespace EFCorePeliculas.Entidades.Configuraciones
         public void Configure(EntityTypeBuilder<Actor> builder)
         {
             //Actor
-            builder.Property(prop => prop.nombre)
+            builder.Property(prop => prop.Nombre)
                 .HasMaxLength(150)
                 .IsRequired();
         }

@@ -1,5 +1,6 @@
 ﻿using EFCorePeliculas.Entidades;
 using EFCorePeliculas.Entidades.Configuraciones;
+using EFCorePeliculas.Entidades.Seeding;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
@@ -30,6 +31,7 @@ namespace EFCorePeliculas
             //FluentAPI
             //modelBuilder.ApplyConfiguration(new GeneroConfig()); // Si queremos hacer uno por uno
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly()); // Coge todas IEntityConfigurations del assembly
+            SeedingModuloConsulta.Seed(modelBuilder);
         }
     }
 }
