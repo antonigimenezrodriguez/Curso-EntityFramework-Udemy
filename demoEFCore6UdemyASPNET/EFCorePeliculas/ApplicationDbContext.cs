@@ -11,6 +11,7 @@ namespace EFCorePeliculas
         public DbSet<Genero> Generos { get; set; }
         public DbSet<Actor> Actores { get; set; }
         public DbSet<Cine> Cines { get; set; }
+        public DbSet<CineOferta> CinesOfertas { get; set; }
         public DbSet<Pelicula> Peliculas { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -21,7 +22,7 @@ namespace EFCorePeliculas
             //Genero
             modelBuilder.Entity<Genero>().HasKey(prop => prop.Identificador); // configurar PK
             modelBuilder.Entity<Genero>().Property(prop => prop.Nombre)
-               // .HasColumnName("NombreGenero") //Cambiar el nombre de la columna
+                // .HasColumnName("NombreGenero") //Cambiar el nombre de la columna
                 .HasMaxLength(150) //Longitud máxima
                 .IsRequired() //Campo requerido, no null
                 ;
@@ -50,6 +51,14 @@ namespace EFCorePeliculas
             modelBuilder.Entity<Pelicula>().Property(prop => prop.PosterURL)
                 .HasMaxLength(500)
                 .IsUnicode(false); //Ahorramos espacio porque no vamos a guardar carácteres árabes, emojis, ñ...
+
+            //CineOferta
+            modelBuilder.Entity<CineOferta>().Property(prop => prop.PorcentajeDescuento)
+                .HasPrecision(precision: 5, scale: 2);
+            modelBuilder.Entity<CineOferta>().Property(prop => prop.FechaInicio)
+                .HasColumnType("date");
+            modelBuilder.Entity<CineOferta>().Property(prop => prop.FechaFin)
+                .HasColumnType("date");
 
         }
 

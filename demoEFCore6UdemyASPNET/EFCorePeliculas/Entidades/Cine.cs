@@ -10,5 +10,8 @@ namespace EFCorePeliculas.Entidades
         //[Precision(precision: 9, scale: 2)] //Definir la precisión de los decimales, cuanta más precisión, más espacio utiliza. también en FluentApi
         public decimal Precio { get; set; }
         public Point Ubicacion { get; set; }
+
+        //Propiedad de navegación
+        public CineOferta CineOferta { get; set; }
     }
 }
