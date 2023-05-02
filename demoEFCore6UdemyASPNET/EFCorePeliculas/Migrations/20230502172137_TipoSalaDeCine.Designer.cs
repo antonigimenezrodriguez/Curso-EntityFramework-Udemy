@@ -13,7 +13,7 @@ using NetTopologySuite.Geometries;
 namespace EFCorePeliculas.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230502171620_TipoSalaDeCine")]
+    [Migration("20230502172137_TipoSalaDeCine")]
     partial class TipoSalaDeCine
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -162,7 +162,9 @@ namespace EFCorePeliculas.Migrations
                         .HasColumnType("decimal(9,2)");
 
                     b.Property<int>("TiposalaDeCine")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(1);
 
                     b.HasKey("Id");
 
