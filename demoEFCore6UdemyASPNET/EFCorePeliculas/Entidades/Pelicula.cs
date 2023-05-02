@@ -10,5 +10,9 @@ namespace EFCorePeliculas.Entidades
         public DateTime FechaEstreno { get; set; }
         //[Unicode(false)] // No nos hace falta admitir todos los carácteres. También en FluentApi
         public string PosterURL { get; set; }
+
+        //FK
+        public HashSet<Genero> Generos { get; set; }
+        public HashSet<SalaDeCine> SalasDeCine { get; set; }
     }
 }

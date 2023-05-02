@@ -13,5 +13,8 @@ namespace EFCorePeliculas.Entidades
         // [Required] // Campo requerido, no puede ser null también con ApiFluent
         //[Column("NombreGenero")] //Para cambiar el nombre de la columna en la base de datos, también con ApiFluent
         public string Nombre { get; set; }
+
+        //FK
+        public HashSet<Pelicula> Peliculas { get; set; }
     }
 }

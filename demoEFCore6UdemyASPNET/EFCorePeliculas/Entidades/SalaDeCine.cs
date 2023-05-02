@@ -10,5 +10,6 @@
         public int CineId { get; set; }
         //Propiedades de navegación
         public Cine Cine { get; set; }
+        public HashSet<Pelicula> Peliculas { get; set; }
     }
 }
