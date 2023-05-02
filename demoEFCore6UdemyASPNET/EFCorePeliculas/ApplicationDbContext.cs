@@ -1,5 +1,7 @@
 ﻿using EFCorePeliculas.Entidades;
+using EFCorePeliculas.Entidades.Configuraciones;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace EFCorePeliculas
 {
@@ -26,49 +28,8 @@ namespace EFCorePeliculas
             base.OnModelCreating(modelBuilder);
 
             //FluentAPI
-            //Genero
-            modelBuilder.Entity<Genero>().HasKey(prop => prop.Identificador); // configurar PK
-            modelBuilder.Entity<Genero>().Property(prop => prop.Nombre)
-                // .HasColumnName("NombreGenero") //Cambiar el nombre de la columna
-                .HasMaxLength(150) //Longitud máxima
-                .IsRequired() //Campo requerido, no null
-                ;
-            //modelBuilder.Entity<Genero>().ToTable(name: "TablaGeneros", schema: "Peliculas"); //Cambiar el nombre de la tabla 
-
-            //Actor
-            modelBuilder.Entity<Actor>().Property(prop => prop.nombre)
-                .HasMaxLength(150)
-                .IsRequired();
-
-            //Cine
-            modelBuilder.Entity<Cine>().Property(prop => prop.Nombre)
-                .HasMaxLength(150)
-                .IsRequired();
-
-            //Pelicula
-            modelBuilder.Entity<Pelicula>().Property(prop => prop.Titulo)
-                .HasMaxLength(250)
-                .IsRequired();
-            modelBuilder.Entity<Pelicula>().Property(prop => prop.PosterURL)
-                .HasMaxLength(500)
-                .IsUnicode(false); //Ahorramos espacio porque no vamos a guardar carácteres árabes, emojis, ñ...
-
-            //CineOferta
-            modelBuilder.Entity<CineOferta>().Property(prop => prop.PorcentajeDescuento)
-                .HasPrecision(precision: 5, scale: 2);
-
-            //SalaDeCine
-            modelBuilder.Entity<SalaDeCine>().Property(prop => prop.Precio)
-                .HasPrecision(precision: 9, scale: 2);
-            modelBuilder.Entity<SalaDeCine>().Property(prop => prop.TiposalaDeCine)
-                //.HasDefaultValueSql("GETDATE()") // De esta forma se pueden usar expresiones SQL para el valor por defecto, en este caso se obtendria la hora actual desde SQL
-                .HasDefaultValue(TipoSalaDeCine.DosDimensiones); //Especificamos el valor por defecto
-
-            //PeliculaActor
-            modelBuilder.Entity<PeliculaActor>().HasKey(prop => new { prop.PeliculaId, prop.ActorId });
-            modelBuilder.Entity<PeliculaActor>().Property(prop => prop.Personaje)
-                .HasMaxLength(150);
+            //modelBuilder.ApplyConfiguration(new GeneroConfig()); // Si queremos hacer uno por uno
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly()); // Coge todas IEntityConfigurations del assembly
         }
-
     }
 }
