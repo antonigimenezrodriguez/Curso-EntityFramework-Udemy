@@ -14,8 +14,10 @@ namespace EFCorePeliculas
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-            builder.Services.AddDbContext<ApplicationDbContext>(opciones => opciones.UseSqlServer(connectionString));
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection"); //Recoger cadena de conexión del appsettings.json
+            builder.Services.AddDbContext<ApplicationDbContext>(opciones => 
+                            opciones.UseSqlServer(connectionString, //Usar SQL server en entity framework
+                            sqlServer => sqlServer.UseNetTopologySuite())); //Utilizar NetTopologySuite para guardar y operar con coordenadas
 
             var app = builder.Build();
 
