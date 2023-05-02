@@ -18,7 +18,9 @@ namespace EFCorePeliculas.Controllers
         [HttpGet]
         public async Task<IEnumerable<Genero>> Get()
         {
-            return await context.Generos.ToListAsync();
+            return await context.Generos
+                //.AsTracking() // Como por defecto hemos configurado que sean no tracking, si queremos modificar los datos inmediatamente, tenemos que añadir AsTracking
+                .ToListAsync();
         }
     }
 }
